@@ -22,6 +22,19 @@ class RegisterServiceTest {
         verify(smsService, never()).send(user);
     }
 
+    @Test
+    public void should_send_one_sms_given_user_with_phone(){
+        SmsService smsService = mock(SmsService.class);
 
+        User user = new User();
+        user.setPhone("1111");
+
+        RegisterService registerService = new RegisterService(smsService);
+        registerService.register(user);
+
+
+        verify(smsService, times(1)).send(user);
+
+    }
 
 }
