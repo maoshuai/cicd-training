@@ -26,6 +26,12 @@ class UserServiceTest {
         assertEquals(DISCOUNT,discount);
     }
 
+    @Test
+    public void should_return_no_discount_given_age_younger_than_60(){
+        User user = getUserOfAge(59);
+        double discount = userService.getDiscount(user);
+        assertEquals(NO_DISCOUNT,discount);
+    }
 
     private User getUserOfAge(int i) {
         User user = new User();
