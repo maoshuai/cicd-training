@@ -22,4 +22,10 @@ class FizzBuzzTest {
         FizzBuzz fizzBuzz = new FizzBuzz();
         assertEquals("Buzz", fizzBuzz.handleNumber(5));
     }
+
+    @Test
+    void should_return_FizzBuzz_is_given_multiple_of_both_5_and_3() {
+        FizzBuzz fizzBuzz = new FizzBuzz();
+        assertEquals("FizzBuzz", fizzBuzz.handleNumber(15));
+    }
 }
