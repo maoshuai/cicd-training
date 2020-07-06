@@ -39,5 +39,13 @@ class FizzBuzzTest {
         verify(printService, times(27)).print("Fizz");
     }
 
+    @Test
+    void should_print_14_Buzz_when_print_answer() {
+        FizzBuzzPrintService printService = mock(FizzBuzzPrintService.class);
+        FizzBuzz fizzBuzz = new FizzBuzz(printService);
+        fizzBuzz.printAnswer();
+
+        verify(printService, times(14)).print("Buzz");
+    }
 
 }
