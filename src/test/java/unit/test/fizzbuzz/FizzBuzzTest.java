@@ -17,5 +17,9 @@ class FizzBuzzTest {
         assertEquals("Fizz", fizzBuzz.handleNumber(3));
     }
 
-
+    @Test
+    void should_return_Fizz_is_given_multiple_of_5() {
+        FizzBuzz fizzBuzz = new FizzBuzz();
+        assertEquals("Buzz", fizzBuzz.handleNumber(5));
+    }
 }
