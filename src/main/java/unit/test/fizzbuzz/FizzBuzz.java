@@ -1,6 +1,10 @@
 package unit.test.fizzbuzz;
 
 public class FizzBuzz {
+    private FizzBuzzPrintService printService;
+    public FizzBuzz(FizzBuzzPrintService printService){
+        this.printService = printService;
+    }
     public String handleNumber(int i) {
        if(i % 15 == 0){
            return "FizzBuzz";
@@ -12,5 +16,11 @@ public class FizzBuzz {
            return "Buzz";
        }
        return String.valueOf(i);
+    }
+
+    public void printAnswer(){
+        for(int i=1;i<=100;i++){
+            printService.print(handleNumber(i));
+        }
     }
 }
