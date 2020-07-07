@@ -27,4 +27,17 @@ class TrialHistoryTest {
         verify(gameOutputService, times(1)).println("1. xxx:yyy");
 
     }
+
+    @Test
+    void should_show_right_history_sequence_given_2_trials() {
+        GameOutputService gameOutputService = mock(GameOutputService.class);
+        TrialHistory trialHistory = new TrialHistory(gameOutputService);
+        trialHistory.addTrial("1 2 3 4", "4A4B");
+        trialHistory.addTrial("4 3 2 1", "0A4B");
+        trialHistory.showHistory();
+
+        verify(gameOutputService, times(1)).println("1. 1 2 3 4:4A4B");
+        verify(gameOutputService, times(1)).println("2. 4 3 2 1:0A4B");
+
+    }
 }

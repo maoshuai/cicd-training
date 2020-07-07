@@ -22,13 +22,13 @@ public class TrialHistory {
     }
 
     public void showHistory(){
-        StringBuilder sb = new StringBuilder();
+
         for(int i=0;i<userInputHistory.size();i++){
-            sb.append(i+1).append(". ")
-                    .append(userInputHistory.get(i))
-                    .append(":").
-                    append(guessOutputHistory.get(i));
-            gameOutputService.println(sb.toString());
+            String historyItem = (i + 1) + ". " +
+                    userInputHistory.get(i) +
+                    ":" +
+                    guessOutputHistory.get(i);
+            gameOutputService.println(historyItem);
         }
 
 
