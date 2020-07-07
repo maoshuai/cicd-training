@@ -31,4 +31,10 @@ class AnswerTest {
         Answer answer = new Answer(Arrays.asList("1", "2", "3", "4"));
         assertEquals("1A2B", answer.guess("0 3 2 4"));
     }
+
+    @Test
+    void should_output_0A0B_given_input_5678_when_answer_is_1234(){
+        Answer answer = new Answer(Arrays.asList("1", "2", "3", "4"));
+        assertEquals("0A0B", answer.guess("5 6 7 8"));
+    }
 }
