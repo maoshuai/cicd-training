@@ -35,7 +35,11 @@ public class GuessGame {
             String guessOutput = answer.guess(input);
             if("4A0B".equals(guessOutput)){
                 return true;
+            }else{
+                gameOutputService.println("Missed!");
+                trialHistory.showHistory();
             }
+            trialHistory.addTrial(input, guessOutput);
         }
         return false;
     }

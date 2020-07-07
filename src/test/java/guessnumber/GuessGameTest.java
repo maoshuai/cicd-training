@@ -15,9 +15,14 @@ class GuessGameTest {
         GameInputService gameInputService = mock(GameInputService.class);
         when(gameInputService.readLine()).thenReturn("2 2 3 4");
 
+        GameOutputService gameOutputService = mock(GameOutputService.class);
+        TrialHistory trialHistory = mock(TrialHistory.class);
+
         GuessGame guessGame = new GuessGame();
         guessGame.setAnswer(answer);
         guessGame.setGameInputService(gameInputService);
+        guessGame.setGameOutputService(gameOutputService);
+        guessGame.setTrialHistory(trialHistory);
 
 
         guessGame.play();
@@ -34,10 +39,14 @@ class GuessGameTest {
         GameInputService gameInputService = mock(GameInputService.class);
         when(gameInputService.readLine()).thenReturn("2 2 3 4");
 
+        GameOutputService gameOutputService = mock(GameOutputService.class);
+        TrialHistory trialHistory = mock(TrialHistory.class);
+
         GuessGame guessGame = new GuessGame();
         guessGame.setAnswer(answer);
         guessGame.setGameInputService(gameInputService);
-
+        guessGame.setGameOutputService(gameOutputService);
+        guessGame.setTrialHistory(trialHistory);
 
         assertFalse(guessGame.play());
 
