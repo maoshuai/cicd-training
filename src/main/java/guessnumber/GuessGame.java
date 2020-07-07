@@ -19,14 +19,25 @@ public class GuessGame {
         this.gameInputService = gameInputService;
     }
 
-    public void play(){
+    private GameOutputService gameOutputService;
+
+    public void setGameOutputService(GameOutputService gameOutputService) {
+        this.gameOutputService = gameOutputService;
+    }
+
+    /**
+     *
+     * @return true if hit the right answer
+     */
+    public boolean play(){
         for(int i=0;i<6;i++){
             String input = gameInputService.readLine();
             String guessOutput = answer.guess(input);
             if("4A0B".equals(guessOutput)){
-                break;
+                return true;
             }
         }
+        return false;
     }
 
 

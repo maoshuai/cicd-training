@@ -42,4 +42,22 @@ class GuessGameTest {
         verify(answer, atMost(1)).guess(anyString());
         verify(answer, atMost(1)).guess("1 2 3 4");
     }
+
+    @Test
+    void should_return_true_when_hit_the_right_answer() {
+
+        // try a right input
+        Answer answer = mock(Answer.class);
+        when(answer.guess("1 2 3 4")).thenReturn("4A0B");
+
+        GameInputService gameInputService = mock(GameInputService.class);
+        when(gameInputService.readLine()).thenReturn("1 2 3 4");
+
+        GuessGame guessGame = new GuessGame();
+        guessGame.setAnswer(answer);
+        guessGame.setGameInputService(gameInputService);
+
+        assertTrue(guessGame.play());
+
+    }
 }
