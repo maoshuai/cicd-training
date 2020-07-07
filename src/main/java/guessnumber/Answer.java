@@ -11,4 +11,9 @@ public class Answer {
     public String toPrintFormat(){
         return String.join(" ", answerDigits);
     }
+
+
+    public String guess(String inputDigits) {
+        return "1A0B";
+    }
 }
