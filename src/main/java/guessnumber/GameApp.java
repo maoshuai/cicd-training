@@ -2,12 +2,13 @@ package guessnumber;
 
 public class GameApp {
     public static void main(String[] args) {
-        GuessGame game = new GuessGame();
-        game.setAnswer(new AnswerGenerator().generate());
-        game.setGameInputService(new GameInputService());
+        GuessGame.GuessGameBuilder gameBuilder = new GuessGame.GuessGameBuilder();
+        gameBuilder.setAnswer(new AnswerGenerator().generate());
+        gameBuilder.setGameInputService(new GameInputService());
         GameOutputService gameOutputService = new GameOutputService();
-        game.setGameOutputService(gameOutputService);
-        game.setTrialHistory(new TrialHistory(gameOutputService));
+        gameBuilder.setGameOutputService(gameOutputService);
+        gameBuilder.setTrialHistory(new TrialHistory(gameOutputService));
+        GuessGame game = gameBuilder.build();
         game.play();
     }
 }

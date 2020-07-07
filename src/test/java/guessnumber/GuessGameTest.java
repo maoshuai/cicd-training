@@ -1,6 +1,9 @@
 package guessnumber;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,14 +21,14 @@ class GuessGameTest {
         GameOutputService gameOutputService = mock(GameOutputService.class);
         TrialHistory trialHistory = mock(TrialHistory.class);
 
-        GuessGame guessGame = new GuessGame();
-        guessGame.setAnswer(answer);
-        guessGame.setGameInputService(gameInputService);
-        guessGame.setGameOutputService(gameOutputService);
-        guessGame.setTrialHistory(trialHistory);
+        GuessGame.GuessGameBuilder guessGameBuilder = new GuessGame.GuessGameBuilder();
+        guessGameBuilder.setAnswer(answer);
+        guessGameBuilder.setGameInputService(gameInputService);
+        guessGameBuilder.setGameOutputService(gameOutputService);
+        guessGameBuilder.setTrialHistory(trialHistory);
 
 
-        guessGame.play();
+        guessGameBuilder.build().play();
         verify(answer, atMost(6)).guess(anyString());
     }
 
@@ -42,11 +45,12 @@ class GuessGameTest {
         GameOutputService gameOutputService = mock(GameOutputService.class);
         TrialHistory trialHistory = mock(TrialHistory.class);
 
-        GuessGame guessGame = new GuessGame();
-        guessGame.setAnswer(answer);
-        guessGame.setGameInputService(gameInputService);
-        guessGame.setGameOutputService(gameOutputService);
-        guessGame.setTrialHistory(trialHistory);
+        GuessGame.GuessGameBuilder guessGameBuilder = new GuessGame.GuessGameBuilder();
+        guessGameBuilder.setAnswer(answer);
+        guessGameBuilder.setGameInputService(gameInputService);
+        guessGameBuilder.setGameOutputService(gameOutputService);
+        guessGameBuilder.setTrialHistory(trialHistory);
+        GuessGame guessGame = guessGameBuilder.build();
 
         assertFalse(guessGame.play());
 
@@ -62,9 +66,15 @@ class GuessGameTest {
         GameInputService gameInputService = mock(GameInputService.class);
         when(gameInputService.readLine()).thenReturn("1 2 3 4");
 
-        GuessGame guessGame = new GuessGame();
-        guessGame.setAnswer(answer);
-        guessGame.setGameInputService(gameInputService);
+        GameOutputService gameOutputService = mock(GameOutputService.class);
+        TrialHistory trialHistory = mock(TrialHistory.class);
+
+        GuessGame.GuessGameBuilder guessGameBuilder = new GuessGame.GuessGameBuilder();
+        guessGameBuilder.setAnswer(answer);
+        guessGameBuilder.setGameInputService(gameInputService);
+        guessGameBuilder.setGameOutputService(gameOutputService);
+        guessGameBuilder.setTrialHistory(trialHistory);
+        GuessGame guessGame = guessGameBuilder.build();
 
         guessGame.play();
         verify(answer, atMost(1)).guess(anyString());
@@ -81,11 +91,60 @@ class GuessGameTest {
         GameInputService gameInputService = mock(GameInputService.class);
         when(gameInputService.readLine()).thenReturn("1 2 3 4");
 
-        GuessGame guessGame = new GuessGame();
-        guessGame.setAnswer(answer);
-        guessGame.setGameInputService(gameInputService);
+        GameOutputService gameOutputService = mock(GameOutputService.class);
+        TrialHistory trialHistory = mock(TrialHistory.class);
+
+        GuessGame.GuessGameBuilder guessGameBuilder = new GuessGame.GuessGameBuilder();
+        guessGameBuilder.setAnswer(answer);
+        guessGameBuilder.setGameInputService(gameInputService);
+        guessGameBuilder.setGameOutputService(gameOutputService);
+        guessGameBuilder.setTrialHistory(trialHistory);
+        GuessGame guessGame = guessGameBuilder.build();
 
         assertTrue(guessGame.play());
+
+    }
+
+    @Test
+    void should_raise_exception_when_build_incomplete_game() {
+        assertThrows(NullPointerException.class, ()->{
+            new GuessGame.GuessGameBuilder().build();
+        });
+
+        assertThrows(NullPointerException.class, ()->{
+            new GuessGame.GuessGameBuilder()
+                    .setAnswer(new Answer(Arrays.asList("1", "2", "3", "4")))
+                    .build();
+        });
+
+        assertThrows(NullPointerException.class, ()->{
+            new GuessGame.GuessGameBuilder()
+                    .setAnswer(new Answer(Arrays.asList("1", "2", "3", "4")))
+                    .setGameInputService(new GameInputService())
+                    .build();
+        });
+        assertThrows(NullPointerException.class, ()->{
+            new GuessGame.GuessGameBuilder()
+                    .setAnswer(new Answer(Arrays.asList("1", "2", "3", "4")))
+                    .setGameInputService(new GameInputService())
+                    .setGameOutputService(new GameOutputService())
+                    .build();
+        });
+
+    }
+
+
+    @Test
+    void should_return_instance_when_build_complete_game() {
+
+        GameOutputService gameOutputService = new GameOutputService();
+        GuessGame game = new GuessGame.GuessGameBuilder()
+                .setAnswer(new Answer(Arrays.asList("1", "2", "3", "4")))
+                .setGameInputService(new GameInputService())
+                .setGameOutputService(gameOutputService)
+                .setTrialHistory(new TrialHistory(gameOutputService))
+                .build();
+        assertNotNull(game);
 
     }
 }

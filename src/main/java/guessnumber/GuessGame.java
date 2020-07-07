@@ -1,29 +1,21 @@
 package guessnumber;
 
 public class GuessGame {
+    private GuessGame(){
+    }
     private Answer answer;
 
     private TrialHistory trialHistory;
 
-    public void setAnswer(Answer answer) {
-        this.answer = answer;
-    }
 
-    public void setTrialHistory(TrialHistory trialHistory) {
-        this.trialHistory = trialHistory;
-    }
 
     private GameInputService gameInputService;
 
-    public void setGameInputService(GameInputService gameInputService) {
-        this.gameInputService = gameInputService;
-    }
+
 
     private GameOutputService gameOutputService;
 
-    public void setGameOutputService(GameOutputService gameOutputService) {
-        this.gameOutputService = gameOutputService;
-    }
+
 
     /**
      *
@@ -48,5 +40,44 @@ public class GuessGame {
     }
 
 
+    public static class GuessGameBuilder{
+        private GuessGame guessGame = new GuessGame();
+        public GuessGameBuilder setAnswer(Answer answer) {
+            guessGame.answer = answer;
+            return this;
+        }
+
+        public GuessGameBuilder setTrialHistory(TrialHistory trialHistory) {
+            guessGame.trialHistory = trialHistory;
+            return this;
+        }
+
+        public GuessGameBuilder setGameInputService(GameInputService gameInputService) {
+            guessGame.gameInputService = gameInputService;
+            return this;
+        }
+
+        public GuessGameBuilder setGameOutputService(GameOutputService gameOutputService) {
+            guessGame.gameOutputService = gameOutputService;
+            return this;
+        }
+        public GuessGame build(){
+            if(guessGame.gameOutputService == null){
+                throw new NullPointerException("gameOutputService");
+            }
+            if(guessGame.gameInputService == null){
+                throw new NullPointerException("gameInputService");
+            }
+            if(guessGame.trialHistory == null){
+                throw new NullPointerException("trialHistory");
+            }
+            if(guessGame.answer == null){
+                throw new NullPointerException("answer");
+            }
+            return guessGame;
+        }
+
+
+    }
 }
 
