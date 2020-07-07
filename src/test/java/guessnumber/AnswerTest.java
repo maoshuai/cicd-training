@@ -25,4 +25,10 @@ class AnswerTest {
         Answer answer = new Answer(Arrays.asList("1", "2", "3", "4"));
         assertEquals("0A2B", answer.guess("2 4 7 8"));
     }
+
+    @Test
+    void should_output_1A2B_given_input_0324_when_answer_is_1234(){
+        Answer answer = new Answer(Arrays.asList("1", "2", "3", "4"));
+        assertEquals("1A2B", answer.guess("0 3 2 4"));
+    }
 }
