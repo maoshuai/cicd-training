@@ -24,7 +24,7 @@ public class TrialHistory {
     public void showHistory(){
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<userInputHistory.size();i++){
-            sb.append(i).append(". ")
+            sb.append(i+1).append(". ")
                     .append(userInputHistory.get(i))
                     .append(":").
                     append(guessOutputHistory.get(i));

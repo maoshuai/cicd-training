@@ -16,4 +16,15 @@ class TrialHistoryTest {
         verify(gameOutputService, times(3)).println(anyString());
 
     }
+
+    @Test
+    void should_show_expected_history_format_given_a_trial() {
+        GameOutputService gameOutputService = mock(GameOutputService.class);
+        TrialHistory trialHistory = new TrialHistory(gameOutputService);
+        trialHistory.addTrial("xxx", "yyy");
+        trialHistory.showHistory();
+
+        verify(gameOutputService, times(1)).println("1. xxx:yyy");
+
+    }
 }
