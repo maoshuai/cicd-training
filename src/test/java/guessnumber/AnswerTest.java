@@ -37,4 +37,16 @@ class AnswerTest {
         Answer answer = new Answer(Arrays.asList("1", "2", "3", "4"));
         assertEquals("0A0B", answer.guess("5 6 7 8"));
     }
+
+    @Test
+    void should_output_4A0B_given_input_1234_when_answer_is_1234(){
+        Answer answer = new Answer(Arrays.asList("1", "2", "3", "4"));
+        assertEquals("4A0B", answer.guess("1 2 3 4"));
+    }
+
+    @Test
+    void should_output_incorrect_input_given_input_1123_when_answer_is_1234(){
+        Answer answer = new Answer(Arrays.asList("1", "2", "3", "4"));
+        assertEquals("输⼊不正确，重新输⼊", answer.guess("1 1 2 3"));
+    }
 }

@@ -1,6 +1,9 @@
 package guessnumber;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Answer {
     private List<String> answerDigits;
@@ -14,10 +17,17 @@ public class Answer {
 
 
     public String guess(String inputDigits) {
+
+        String[] inputDigitsArr = inputDigits.split(" ");
+
+        Set<String> inputDigitsSet = new HashSet<>(Arrays.asList(inputDigitsArr));
+        if (inputDigitsArr.length != inputDigitsSet.size()) {
+            return "输⼊不正确，重新输⼊";
+        }
+
         int exactlyRight = 0;
         int onlyDigitRight =0;
 
-        String[] inputDigitsArr = inputDigits.split(" ");
 
         for (int i=0;i<4;i++){
             if(inputDigitsArr[i].equals(answerDigits.get(i))){
