@@ -30,17 +30,20 @@ public class GuessGame {
      * @return true if hit the right answer
      */
     public boolean play(){
+        gameOutputService.println("Please input your answer: ");
         for(int i=0;i<6;i++){
             String input = gameInputService.readLine();
             String guessOutput = answer.guess(input);
             if("4A0B".equals(guessOutput)){
+                gameOutputService.println("Bingo! You hit the answer: " + guessOutput);
                 return true;
             }else{
-                gameOutputService.println("Missed!");
+                gameOutputService.println("Sorry! " + guessOutput);
                 trialHistory.showHistory();
             }
             trialHistory.addTrial(input, guessOutput);
         }
+        gameOutputService.println("Sorry! You've run out of your chances");
         return false;
     }
 
