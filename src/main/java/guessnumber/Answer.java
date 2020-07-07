@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Answer {
     private List<String> answerDigits;
-    public Answer(List<String> answerDigts){
-        this.answerDigits = answerDigts;
+    public Answer(List<String> answerDigits){
+        this.answerDigits = answerDigits;
     }
 
     public String toPrintFormat(){
