@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Answer {
+    private static final String INCORRECT_INPUT_MSG = "输⼊不正确，重新输⼊";
     private List<String> answerDigits;
     public Answer(List<String> answerDigits){
         this.answerDigits = answerDigits;
@@ -20,9 +21,13 @@ public class Answer {
 
         String[] inputDigitsArr = inputDigits.split(" ");
 
+        if (inputDigitsArr.length != 4) {
+            return INCORRECT_INPUT_MSG;
+        }
+
         Set<String> inputDigitsSet = new HashSet<>(Arrays.asList(inputDigitsArr));
         if (inputDigitsArr.length != inputDigitsSet.size()) {
-            return "输⼊不正确，重新输⼊";
+            return INCORRECT_INPUT_MSG;
         }
 
         int exactlyRight = 0;
