@@ -14,6 +14,18 @@ public class Answer {
 
 
     public String guess(String inputDigits) {
-        return "1A0B";
+        int exactlyRight = 0;
+        int onlyDigitRight =0;
+
+        String[] inputDigitsArr = inputDigits.split(" ");
+
+        for (int i=0;i<4;i++){
+            if(inputDigitsArr[i].equals(answerDigits.get(i))){
+                exactlyRight ++;
+            }else if (answerDigits.contains(inputDigitsArr[i])){
+                onlyDigitRight++;
+            }
+        }
+        return exactlyRight + "A" + onlyDigitRight + "B";
     }
 }
