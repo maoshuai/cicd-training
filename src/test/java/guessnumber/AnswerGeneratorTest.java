@@ -22,7 +22,22 @@ class AnswerGeneratorTest {
     void should_generate_digits_not_repeated() {
         String answer = new AnswerGenerator().generate();
         String [] digits = answer.split(" ");
-        Set digitsSet = new HashSet(Arrays.asList(digits));
+        Set<String> digitsSet = new HashSet<>(Arrays.asList(digits));
         assertEquals(digitsSet.size(), digits.length);
+    }
+
+    @Test
+    void should_generate_different_answers_when_execute_100_times() {
+        boolean isDifferent = false;
+        String lastAnswer = null;
+        for (int i = 0; i < 100; i++) {
+            String answer = new AnswerGenerator().generate();
+            if(lastAnswer!=null && !lastAnswer.equals(answer)){
+                isDifferent = true;
+                break;
+            }
+            lastAnswer = answer;
+        }
+        assertTrue(isDifferent);
     }
 }
