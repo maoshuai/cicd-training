@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class AnswerGenerator {
     public static final int DEISTS = 4;
 
-    public String generate(){
+    public Answer generate(){
         List<String> answerDegits = new ArrayList<>();
         for (int i = 0; i < DEISTS; i++) {
             while(true){
@@ -19,6 +19,6 @@ public class AnswerGenerator {
             }
 
         }
-        return String.join(" ", answerDegits);
+        return new Answer(answerDegits);
     }
 }
