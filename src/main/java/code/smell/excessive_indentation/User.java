@@ -6,26 +6,26 @@ import java.util.Set;
 
 public class User {
     public boolean validateUserName(String userName) {
-        boolean isValid = false;
         int minUserNameLength = 6;
-        if (userName.length() >= minUserNameLength) {
-            int maxUserNameLength = 25;
-            if (userName.length() <= maxUserNameLength) {
-                boolean isAlphaOrNumber = isAlphaAndNumber(userName);
-                if (isAlphaOrNumber) {
-                    if (!containsDirtyWords(userName)) {
-                        isValid = isUniqueUserName(userName);
-                    }
-                }
-            }
+        if (userName.length() < minUserNameLength) {
+            return false;
+        }
+        int maxUserNameLength = 25;
+        if (userName.length() > maxUserNameLength) {
+            return false;
+        }
+        if (!isAlphaAndNumber(userName)) {
+            return false;
+        }
+        if (containsDirtyWords(userName)) {
+            return false;
         }
 
-        return isValid;
+        return isUniqueUserName(userName);
     }
 
     private boolean isUniqueUserName(String userName) {
-        Set<String> existsNames = new HashSet<>();
-        existsNames.addAll(Arrays.asList("JackLi", "JackWang", "JackZhang"));
+        Set<String> existsNames = new HashSet<>(Arrays.asList("JackLi", "JackWang", "JackZhang"));
 
         return ! existsNames.contains(userName);
     }
@@ -36,13 +36,17 @@ public class User {
 
     private boolean isAlphaAndNumber(String userName) {
         for (char c : userName.toCharArray()) {
-            if (! ((c >= 'a' && c <= 'z') ||
-                    (c >= 'A' && c <= 'Z') ||
-                    (c >= '0' && c <= '9'))) {
+            if (isNotAlphaAndNumberChar(c)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private boolean isNotAlphaAndNumberChar(char c) {
+        return (c < 'a' || c > 'z') &&
+                (c < 'A' || c > 'Z') &&
+                (c < '0' || c > '9');
     }
 }
