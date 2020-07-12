@@ -1,19 +1,19 @@
 package code.smell.primitive_obsession;
 
 public class Toy {
-    private String type;
+    private EToyType type;
     private int length;
-    private String unit;
+    private ELengthUnit unit;
 
-    public Toy(String type, int length, String unit) {
+    public Toy(EToyType type, int length, ELengthUnit ELengthUnit) {
         this.type = type;
         this.length = length;
-        this.unit = unit;
+        this.unit = ELengthUnit;
     }
 
 
     public int length() {
-        if ("m".equalsIgnoreCase(unit)) {
+        if (ELengthUnit.METRE == unit) {
             return length * 100;
         }
 
