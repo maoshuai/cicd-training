@@ -15,20 +15,18 @@ public class EmployeeFinder {
     }
 
     List<String> findEngineerNames() {
-        List<String> results = new ArrayList<>();
-        for (Employee employee : employees) {
-            if (ENGINEER.equalsIgnoreCase(employee.getType())) {
-                results.add(employee.getName());
-            }
-        }
-
-        return results;
+        return findEngineerNamesByType(ENGINEER);
     }
 
+
     List<String> findAdministratorNames() {
+        return findEngineerNamesByType(ADMINISTRATOR);
+    }
+
+    private List<String> findEngineerNamesByType(String engineer) {
         List<String> results = new ArrayList<>();
         for (Employee employee : employees) {
-            if (ADMINISTRATOR.equalsIgnoreCase(employee.getType())) {
+            if (engineer.equalsIgnoreCase(employee.getType())) {
                 results.add(employee.getName());
             }
         }
