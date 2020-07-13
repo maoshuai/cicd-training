@@ -10,9 +10,7 @@ public class Customer {
     }
 
     public String getNameAndPhone() {
-        return name + "(" +
-                mobilePhone.getAreaCode() + ")" +
-                mobilePhone.getPrefix() + "-" +
-                mobilePhone.getNumber();
+        return name + mobilePhone.getFormattedPhoneNumber();
     }
+
 }

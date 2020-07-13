@@ -18,4 +18,11 @@ public class Phone {
     public String getNumber() {
         return unformattedNumber.substring(6, 10);
     }
+
+    public String getFormattedPhoneNumber() {
+        return "(" +
+                getAreaCode() + ")" +
+                getPrefix() + "-" +
+                getNumber();
+    }
 }
