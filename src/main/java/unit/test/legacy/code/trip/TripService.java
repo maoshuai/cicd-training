@@ -21,13 +21,7 @@ public class TripService {
         if (loggedUser == null) {
             throw new UserNotLoggedInException();
         }
-        boolean isFriend = false;
-        for (User friends : user.getFriends()) {
-            if (friends.equals(loggedUser)) {
-                isFriend = true;
-                break;
-            }
-        }
+        boolean isFriend = user.isMyFriend(loggedUser);
         if (isFriend) {
             tripList = tripDAO.findTripsBy(user);
         }
