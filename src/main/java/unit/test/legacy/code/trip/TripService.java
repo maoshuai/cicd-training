@@ -11,22 +11,22 @@ import java.util.List;
 public class TripService {
 
     public List<Trip> getTripsByUser(User user) throws UserNotLoggedInException {
-        List<Trip> list = new ArrayList<Trip>();
-        User usr = UserSession.getInstance().getLoggedUser();
-        if (usr == null) {
+        List<Trip> tripList = new ArrayList<Trip>();
+        User loggedUser = UserSession.getInstance().getLoggedUser();
+        if (loggedUser == null) {
             throw new UserNotLoggedInException();
         }
-        boolean flag = false;
-        for (User user1 : user.getFriends()) {
-            if (user1.equals(usr)) {
-                flag = true;
+        boolean isFriend = false;
+        for (User friends : user.getFriends()) {
+            if (friends.equals(loggedUser)) {
+                isFriend = true;
                 break;
             }
         }
-        if (flag) {
-            list = TripDAO.findTripsByUser(user);
+        if (isFriend) {
+            tripList = TripDAO.findTripsByUser(user);
         }
-        return list;
+        return tripList;
     }
 
 }
