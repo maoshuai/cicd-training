@@ -10,19 +10,19 @@ import java.util.List;
 
 public class TripService {
 
-    private TripDAO tripDAO;
+    private final TripDAO tripDAO;
     public TripService(TripDAO tripDAO){
         this.tripDAO = tripDAO;
     }
 
     public List<Trip> getTripsByUser(User user) throws UserNotLoggedInException {
-        List<Trip> tripList = new ArrayList<Trip>();
         User loggedUser = getLoggedInUser();
         if (loggedUser == null) {
             throw new UserNotLoggedInException();
         }
-        boolean isFriend = user.isMyFriend(loggedUser);
-        if (isFriend) {
+
+        List<Trip> tripList = new ArrayList<>();
+        if (user.isMyFriend(loggedUser)) {
             tripList = tripDAO.findTripsBy(user);
         }
         return tripList;
